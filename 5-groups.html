@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/fabric@5.2.1/dist/fabric.min.js"></script>
+</head>
+<body>
+  <canvas id="canvas" width="500" height="500"></canvas>
+  <script>
+    const canvas = new fabric.Canvas('canvas');
+
+    const circle = new fabric.Circle({
+      radius: 100,
+      fill: '#eff',
+      scaleY: 0.5,
+      originX: 'center',
+      originY: 'center',
+    });
+    //  Setting originX and originY to 'center' will cause it to be centered within the group
+    const text = new fabric.Text('hello fabric', {
+      fontSize: 30,
+      originX: 'center',
+      originY: 'center',
+    });
+
+    const group = new fabric.Group([circle, text], {
+      left: 150,
+      top: 100,
+    });
+
+    canvas.add(group);
+
+    group.item(0).set('fill', 'red');
+    group.item(1).set({
+      text: 'hello group',
+      fill: 'green',
+    });
+    
+  </script>
+</body>
+</html>
