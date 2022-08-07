@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/fabric@5.2.1/dist/fabric.min.js"></script>
+</head>
+<body>
+  <canvas id="canvas" width="500" height="500"></canvas>
+  <script>
+    const canvas = new fabric.Canvas('canvas');
+
+    const path = new fabric.Path('M 0 0 L 200 100 L 170 200 z');
+    path.set({
+      left: 120,
+      top: 120,
+    });
+    canvas.add(path);
+  </script>
+</body>
+</html>
