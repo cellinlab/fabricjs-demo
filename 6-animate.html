@@ -28,6 +28,17 @@
     const animateBtn = document.querySelector('#animate');
 
     animateBtn.addEventListener('click', () => {
+      rect.set({
+        originX: 'center',
+        originY: 'center',
+      })
+      rect.animate('angle', '+=360', {
+        duration: 1000,
+        onChange: canvas.renderAll.bind(canvas),
+        onComplete: () => {
+          console.log('done');
+        }
+      });
       rect.animate('left', rect.left === 100 ? 400: 100, {
         duration: 1000,
         onChange: canvas.renderAll.bind(canvas),
