@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/fabric@5.2.1/dist/fabric.min.js"></script>
+</head>
+<body>
+  <canvas id="canvas" width="500" height="500"></canvas>
+  <button id="change">change</button>
+  <script>
+    const canvas = new fabric.Canvas('canvas');
+    canvas.on('mouse:down', (opts) => {
+      console.log(opts);
+    });
+    const text = new fabric.Text('hello fabric', {
+      left: 100,
+      top: 100,
+    });
+    const alignRidhtText = new fabric.Text(
+      `this is \n a multiline text`,
+      {
+        left: 100,
+        top: 200,
+        textAlign: 'right',
+      }
+    );
+    canvas.add(text);
+    canvas.add(alignRidhtText);
+    document.getElementById('change').addEventListener('click', () => {
+      text.set({
+        text: 'center',
+      });
+      canvas.renderAll();
+    } );
+  </script>
+</body>
+</html>
