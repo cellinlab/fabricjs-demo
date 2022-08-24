@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/fabric@5.2.1/dist/fabric.min.js"></script>
+</head>
+<body>
+  <canvas id="canvas" width="500" height="500"></canvas>
+  <script>
+    const canvas = new fabric.Canvas('canvas');
+
+    const _img = new fabric.Image.fromURL('http://localhost:8080/interface/images/PXeaWcEQ_1635903601020.png', function (img) {
+      const h = 32;
+      const w = 50;
+      console.log(w / img.width)
+      img.set({
+        with: w,
+        height: h,
+        scaleX: w / img.width,
+        scaleY: h / img.height,
+      });
+      canvas.add(img);
+    });
+    const _img2 = new fabric.Image.fromURL('http://localhost:8080/interface/images/PXeaWcEQ_1635903601020.png', function (img2) {
+      const h = 32;
+      const w = 148;
+      img2.set({
+        top: 50,
+        with: w,
+        height: h,
+        scaleX: Math.ceil(w / img2.width),
+        scaleY: Math.ceil(h / img2.height),
+      });
+      canvas.add(img2);
+    });
+  </script>
+</body>
+</html>
