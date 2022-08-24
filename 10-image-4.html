@@ -13,16 +13,30 @@
     const canvas = new fabric.Canvas('canvas');
 
     const _img = new fabric.Image.fromURL('http://localhost:8080/interface/images/PXeaWcEQ_1635903601020.png', function (img) {
-      const h = 32;
-      const w = 50;
-      console.log(w / img.width)
-      img.set({
-        with: w,
-        height: h,
-        scaleX: w / img.width,
-        scaleY: h / img.height,
+      const _group = new fabric.Group([img], {
       });
-      canvas.add(img);
+      canvas.add(_group);
+      
+      setTimeout(() => {
+        const h = 32;
+        const w = 90;
+        console.log(w / img.width)
+        _group.set({
+          width: w,
+          height: h,
+        })
+        img.set({
+          left: img.left - (w - img.width) / 2,
+          with: w,
+          height: h,
+          scaleX: w / img.width,
+          scaleY: h / img.height,
+        });
+        console.log(img.left)
+        
+        canvas.renderAll();
+      }, 1000);
+      
     });
     const _img2 = new fabric.Image.fromURL('http://localhost:8080/interface/images/PXeaWcEQ_1635903601020.png', function (img2) {
       const h = 32;
