@@ -36,7 +36,7 @@
       const image = new fabric.Image(img)
       console.log('img', img)
       console.log('image', image)
-      // image.scaleToWidth(100)
+      image.scaleToHeight(100)
 
       const patternSourceCanvas = new fabric.StaticCanvas()
       patternSourceCanvas.add(image)
@@ -68,11 +68,12 @@
 
       const img2 = await initImage('http://fabricjs.com/assets/ladybug.png')
       const image2 = new fabric.Image(img2)
-      const patternSourceCanvas2 = new fabric.StaticCanvas()
+      image2.scaleToHeight(100)
+      const patternSourceCanvas2 = new fabric.StaticCanvas(null, { enableRetinaScaling: false })
       patternSourceCanvas2.add(image2)
       patternSourceCanvas2.setDimensions({
         width: image2.width,
-        height: image2.height,
+        height: 100,
       })
       patternSourceCanvas2.renderAll()
 
@@ -85,14 +86,18 @@
       const rect2 = new fabric.Rect({
         top: 200,
         width: image2.width * 3,
-        height: patternSourceCanvas.getElement().height,
+        height: patternSourceCanvas2.height,
         fill: pattern2,
+        strokeWidth: 0,
         objectCaching: false
       })
 
       console.log('rect2', rect2.width, rect2.height)
       console.log('image2', image2.width, rect2.height)
-      console.log('patternSourceCanvas.getElement()', patternSourceCanvas.getElement().width, patternSourceCanvas.getElement().height)
+      console.log('patternSourceCanvas2', patternSourceCanvas2)
+      console.log('patternSourceCanvas2', patternSourceCanvas2.width, patternSourceCanvas2.height)
+      console.log('patternSourceCanvas2', patternSourceCanvas2.getElement())
+      console.log('patternSourceCanvas.getElement()', patternSourceCanvas2.getElement().width, patternSourceCanvas2.getElement().height)
 
       canvas.add(rect2)
       canvas.renderAll()
