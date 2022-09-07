@@ -84,11 +84,15 @@
 
       const rect2 = new fabric.Rect({
         top: 200,
-        width: 400,
-        height: 180,
+        width: image2.width * 3,
+        height: patternSourceCanvas.getElement().height,
         fill: pattern2,
         objectCaching: false
       })
+
+      console.log('rect2', rect2.width, rect2.height)
+      console.log('image2', image2.width, rect2.height)
+      console.log('patternSourceCanvas.getElement()', patternSourceCanvas.getElement().width, patternSourceCanvas.getElement().height)
 
       canvas.add(rect2)
       canvas.renderAll()
