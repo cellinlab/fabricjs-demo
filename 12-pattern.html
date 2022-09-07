@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/fabric@5.2.1/dist/fabric.min.js"></script>
+</head>
+<body>
+  <canvas id="canvas" width="500" height="500"></canvas>
+  <script>
+    function initImage (url) {
+      return new Promise((resolve, reject) => {
+        const img = document.createElement('img')
+        img.src = url || defaultImage
+        img.crossOrigin = 'Anonymous'
+        img.onload = () => {
+          resolve(img)
+        }
+        img.onerror = () => {
+          const defaultImg = document.createElement('img')
+          defaultImg.src = defaultImage
+          defaultImg.crossOrigin = 'Anonymous'
+          defaultImg.onload = () => {
+            resolve(defaultImg)
+          }
+        }
+      })
+    }
+
+    (async function () {
+      const canvas = new fabric.Canvas('canvas');
+
+      const img = await initImage('http://fabricjs.com/assets/ladybug.png')
+      const image = new fabric.Image(img)
+      console.log('img', img)
+      console.log('image', image)
+      // image.scaleToWidth(100)
+
+      const patternSourceCanvas = new fabric.StaticCanvas()
+      patternSourceCanvas.add(image)
+      patternSourceCanvas.setDimensions({
+        width: image.width,
+        height: image.height,
+      })
+      patternSourceCanvas.renderAll()
+
+      let padding = 0
+      const pattern = new fabric.Pattern({
+        source: patternSourceCanvas.getElement(),
+        repeat: 'repeat-x',
+      })
+
+      const rect = new fabric.Rect({
+        width: 400,
+        height: 180,
+        fill: pattern,
+        objectCaching: false
+      })
+
+      canvas.add(rect)
+      canvas.renderAll()
+      setInterval(() => {
+        pattern.offsetX = pattern.offsetX + 50
+        canvas.requestRenderAll();
+      }, 250);
+
+      const img2 = await initImage('http://fabricjs.com/assets/ladybug.png')
+      const image2 = new fabric.Image(img2)
+      const patternSourceCanvas2 = new fabric.StaticCanvas()
+      patternSourceCanvas2.add(image2)
+      patternSourceCanvas2.setDimensions({
+        width: image2.width,
+        height: image2.height,
+      })
+      patternSourceCanvas2.renderAll()
+
+      let padding2 = 0
+      const pattern2 = new fabric.Pattern({
+        source: patternSourceCanvas2.getElement(),
+        repeat: 'repeat-x',
+      })
+
+      const rect2 = new fabric.Rect({
+        top: 200,
+        width: 400,
+        height: 180,
+        fill: pattern2,
+        objectCaching: false
+      })
+
+      canvas.add(rect2)
+      canvas.renderAll()
+      setInterval(() => {
+        pattern2.offsetX = pattern2.offsetX - 50
+        canvas.requestRenderAll();
+      }, 250);
+    })()
+  </script>
+</body>
+</html>
