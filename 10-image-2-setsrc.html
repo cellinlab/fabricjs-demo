@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/fabric@5.2.1/dist/fabric.min.js"></script>
+</head>
+<body>
+  <canvas id="canvas" width="500" height="500"></canvas>
+  <script>
+    function initImage (url) {
+      return new Promise((resolve, reject) => {
+        const img = document.createElement('img')
+        img.src = url || defaultImage
+        img.crossOrigin = 'Anonymous'
+        img.onload = () => {
+          resolve(img)
+        }
+        img.onerror = () => {
+          const defaultImg = document.createElement('img')
+          defaultImg.src = defaultImage
+          defaultImg.crossOrigin = 'Anonymous'
+          defaultImg.onload = () => {
+            resolve(defaultImg)
+          }
+        }
+      })
+    }
+
+    (async function () {
+      const canvas = new fabric.Canvas('canvas');
+
+      const img = await initImage('http://fabricjs.com/assets/ladybug.png')
+
+      const _img = new fabric.Image(img, {
+        left: 100,
+        top: 100,
+        angle: -15,
+        padding: 10,
+        cornersize: 10,
+      });
+      canvas.add(_img);
+      setTimeout(() => {
+        _img.setSrc('http://localhost/interface/images/PXeaWcEQ_1635903601020.png', () => {
+          canvas.renderAll();
+        })
+      }, 1000);
+    })()
+  </script>
+</body>
+</html>
