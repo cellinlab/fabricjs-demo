@@ -8,16 +8,17 @@
   <script src="https://unpkg.com/fabric@5.2.1/dist/fabric.min.js"></script>
 </head>
 <body>
-  <canvas id="canvas" width="500" height="500"></canvas>
+  <canvas id="canvas" width="1000" height="500"></canvas>
   <button id="change">change</button>
   <script>
     const canvas = new fabric.Canvas('canvas');
     
-    const textBox = new fabric.Textbox('hello fabric hello canvas', {
+    const textBox = new fabric.Textbox('这是一段测试的文字，这是一段测试的文字', {
       left: 100,
       top: 100,
       width: 100,
       height: 100,
+      splitByGrapheme: true
     });
 
     canvas.add(textBox);
@@ -26,7 +27,7 @@
     const btn = document.getElementById('change');
     btn && btn.addEventListener('click', () => {
       textBox.set({
-        text: `hello ${Math.round(Math.random() * 100)}`,
+        width: textBox.width + 10,
       });
       canvas.renderAll();
     });
