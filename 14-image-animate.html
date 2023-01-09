@@ -46,21 +46,18 @@
         originY: 'center',
       });
       const _img = new fabric.Image(img, {
-        left: 100,
-        top: 100,
-        padding: 10,
-        cornersize: 10,
+        originY: 'bottom',
+        left: 0,
+        top: 0,
       });
       const group = new fabric.Group([rect, _img], {
-        left: 100,
-        top: 100,
-        padding: 10,
-        cornersize: 10,
+        left: 0,
+        top: 0,
       });
       canvas.add(group);
 
       setTimeout(() => {
-        _img.animate('scaleX', 2, {
+        _img.animate('scaleY', 2, {
           duration: 1000,
           onChange: canvas.renderAll.bind(canvas),
           onComplete: () => {
@@ -70,7 +67,7 @@
       }, 1000);
 
       setTimeout(() => {
-        _img.animate('scaleX', 1, {
+        _img.animate('scaleY', 1, {
           duration: 1000,
           onChange: canvas.renderAll.bind(canvas),
           onComplete: () => {
