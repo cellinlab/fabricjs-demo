@@ -35,24 +35,21 @@
       const img = await initImage('http://fabricjs.com/assets/ladybug.png')
 
       const rect = new fabric.Rect({
-        width: 100,
-        height: 100,
+        width: 200,
+        height: 200,
         fill: 'red',
         stroke: 'black',
         strokeWidth: 1,
-        left: 100,
-        top: 100,
-        originX: 'center',
-        originY: 'center',
+        left: 0,
+        top: 0,
       });
       const _img = new fabric.Image(img, {
         originY: 'bottom',
-        left: 0,
-        top: 0,
+        originX: 'center',
+        left: 100,
+        top: 200,
       });
       const group = new fabric.Group([rect, _img], {
-        left: 0,
-        top: 0,
       });
       canvas.add(group);
 
